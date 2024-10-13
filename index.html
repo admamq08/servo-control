@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servo Control</title>
+  <script>
+    // Replace 'http://<ESP_IP_ADDRESS>' with the actual IP address of your NodeMCU
+    const ESP_IP = 'http://192.168.0.175'; // Change this to your NodeMCU's IP
+
+    function rotateServo() {
+      fetch(ESP_IP + '/rotate')
+        .then(response => {
+          if (response.ok) {
+            return response.text();
+          } else {
+            throw new Error('Failed to connect to ESP8266');
+          }
+        })
+        .then(data => console.log(data))
+        .catch(error => alert(error));
+    }
+  </script>
+</head>
+<body>
+  <h1>Servo Control</h1>
+  <button onclick="rotateServo()">Rotate Servo</button>
+</body>
+</html>
